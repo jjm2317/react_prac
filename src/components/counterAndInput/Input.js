@@ -1,26 +1,40 @@
 import React, { useState } from "react";
 
 const Input = () => {
-  const [inputText, setInputText] = useState("");
+  const [inputValue, setInputValue] = useState({
+    defaultValue: "",
+    additionalValue: "",
+  });
+
+  const { defaultValue, additionalValue } = inputValue;
   const [resultText, setResultText] = useState("");
   const onChange = (e) => {
-    setInputText(e.target.value);
+    const { name, value } = e.target;
+    setInputValue({
+      ...inputValue,
+      [name]: value,
+    });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
-    setResultText(inputText);
+    setResultText(`${inputValue.defaultValue} ${inputValue.additionalValue}`);
   };
 
   const onClick = (e) => {
     e.preventDefault();
-    setInputText("");
+    // setInputText("")
   };
   return (
     <>
       <form onSubmit={onSubmit}>
-        <input onChange={onChange} value={inputText} />
+        <input name="defaultValue" onChange={onChange} value={defaultValue} />
+        <input
+          name="additionalValue"
+          placeholder="추가값"
+          onChange={onChange}
+          value={additionalValue}
+        />
         <button type="submit">입력</button>
         <button onClick={onClick}>초기화</button>
       </form>

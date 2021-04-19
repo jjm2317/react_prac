@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Counter from "./components/Counter";
-import Input from "./components/Input";
-import ShowContainer from "./components/ShowContainer";
+import Counter from "./components/counterAndInput/Counter";
+import Input from "./components/counterAndInput/Input";
+import ShowContainer from "./components/counterAndInput/ShowContainer";
 function App() {
   const [renderMode, setRenderMode] = useState("all");
   const selectRenderMode = (e) => {
