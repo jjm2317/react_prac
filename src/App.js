@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Counter from "./components/counterAndInput/Counter";
 import Input from "./components/counterAndInput/Input";
 import ShowContainer from "./components/counterAndInput/ShowContainer";
+import UserContainer from "./components/userList/UserContainer";
 function App() {
   const [renderMode, setRenderMode] = useState("all");
   const selectRenderMode = (e) => {
@@ -21,6 +22,7 @@ function App() {
           </>
         )}
       </ShowContainer>
+      <UserContainer />
     </div>
   );
 }
