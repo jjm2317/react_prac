@@ -1,6 +1,7 @@
 import React from "react";
 
-const User = ({ id, nickname, email }) => {
+const User = ({ user, onRemove }) => {
+  const { id, nickname, email } = user;
   return (
     <>
       <dl>
@@ -9,6 +10,7 @@ const User = ({ id, nickname, email }) => {
         <dt>이메일</dt>
         <dd>{email}</dd>
       </dl>
+      <button onClick={() => onRemove(id)}>삭제</button>
     </>
   );
 };

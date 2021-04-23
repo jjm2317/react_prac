@@ -49,6 +49,10 @@ const UserContainer = () => {
       email: "",
     });
   };
+  const onRemove = (id) => {
+    console.log(id);
+    setUsers(users.filter((user) => user.id !== id));
+  };
   return (
     <div>
       <UserForm
@@ -59,8 +63,8 @@ const UserContainer = () => {
         inputValue={inputValue}
       />
       <section>
-        {users.map(({ id, nickname, email }) => (
-          <User key={id} nickname={nickname} email={email} />
+        {users.map((user) => (
+          <User key={user.id} user={user} onRemove={onRemove} />
         ))}
       </section>
     </div>
