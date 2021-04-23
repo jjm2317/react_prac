@@ -8,12 +8,14 @@ const UserContainer = () => {
       id: 1,
       nickname: "wlaks",
       email: "wlaks2317@gmail.com",
+      active: true,
     },
 
     {
       id: 2,
       nickname: "seonghyun",
       email: "lee@naver.com",
+      active: false,
     },
   ]);
 
@@ -53,6 +55,14 @@ const UserContainer = () => {
     console.log(id);
     setUsers(users.filter((user) => user.id !== id));
   };
+
+  const onToggle = (id) => {
+    setUsers(
+      users.map((user) =>
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
+  };
   return (
     <div>
       <UserForm
@@ -64,7 +74,12 @@ const UserContainer = () => {
       />
       <section>
         {users.map((user) => (
-          <User key={user.id} user={user} onRemove={onRemove} />
+          <User
+            key={user.id}
+            user={user}
+            onRemove={onRemove}
+            onToggle={onToggle}
+          />
         ))}
       </section>
     </div>
