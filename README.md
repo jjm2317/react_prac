@@ -1,13 +1,13 @@
 # React 복습용 레포
 
-## /components/showContainer
+## /components/showContainer, App.js
 
 메뉴 클릭 시 아래 작업한 컴포넌트들 중 해당 컴포넌트 화면에 출력
 
 **학습 목표 및 요구사항**
 
-- 상태에 따른 컴포넌트 조건부 렌더링
-- Symbol과 Object.freeze를 통한 상수 구현
+- 상태에 따른 컴포넌트 조건부 렌더링(App.js에서 구현)
+- Symbol과 Object.freeze를 통한 상수 구현(App.js에서 구현)
 
 ## /components/counterAndInput
 
@@ -25,5 +25,5 @@
 
 **학습 목표 및 요구사항**
 
-- 배열 고차함수 (map, filter)를 이용한 CRUD 구현
+- 배열 고차함수 (map, filter)를 이용한 CRUD 구현 & 불변성 유지
 - 배열을 통한 컴포넌트 렌더링 시 key 값 전달을 통한 update 관리
