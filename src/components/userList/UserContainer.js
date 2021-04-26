@@ -75,9 +75,7 @@ const UserContainer = () => {
     return console.log("언마운트");
   }, [users]);
 
-  const count = useMemo(() => {
-    countActiveUsers(users);
-  }, [users]);
+  const count = useMemo(() => countActiveUsers(users), [users]);
   return (
     <div>
       <UserForm
