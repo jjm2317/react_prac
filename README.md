@@ -1,6 +1,6 @@
 # React 복습용 레포
 
-## ./component/counterAndInput
+## /component/counterAndInput
 
 카운터와 여러개의 인풋 상태관리 구현
 
@@ -12,7 +12,7 @@
 - object 형태의 값을 상태로 이용한 여러개의 인풋 동시 관리
 - useRef 훅을 이용한 돔 요소 관리
 
-## ./component/userList
+## /component/userList
 
 **학습 목표 및 요구사항**
 
