@@ -3,6 +3,7 @@ import Counter from "./components/counterAndInput/Counter";
 import Input from "./components/counterAndInput/Input";
 import ShowContainer from "./components/showContainer/ShowContainer";
 import UserContainer from "./components/userList/UserContainer";
+import UserContainerByReducer from "./components/userList/UserContainerByReducer";
 function App() {
   const RenderModes = Object.freeze({
     ALL: Symbol.for("all"),
@@ -26,13 +27,13 @@ function App() {
             case RenderModes.INPUTS:
               return <Input />;
             case RenderModes.USERS:
-              return <UserContainer />;
+              return <UserContainerByReducer />;
             case RenderModes.ALL:
               return (
                 <>
                   <Counter />
                   <Input />
-                  <UserContainer />
+                  <UserContainerByReducer />
                 </>
               );
             default:

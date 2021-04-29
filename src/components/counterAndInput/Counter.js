@@ -1,14 +1,38 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
+
+const initialState = 0;
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return ++state;
+    case "DECREMENT":
+      return --state;
+  }
+}
 
 const Counter = () => {
-  const [num, setNum] = useState(0);
+  const [num, dispatch] = useReducer(reducer, initialState);
 
   const increase = () => {
-    setNum((v) => ++v);
+    dispatch({
+      type: "INCREMENT",
+    });
   };
-  const decrease = () => {
-    setNum((v) => --v);
-  };
+
+  const decrease = () =>
+    dispatch({
+      type: "DECREMENT",
+    });
+
+  // const [num, setNum] = useState(0);
+
+  // const increase = () => {
+  //   setNum((v) => ++v);
+  // };
+  // const decrease = () => {
+  //   setNum((v) => --v);
+  // };
 
   // let num = 0;
   // const increase = () => {
