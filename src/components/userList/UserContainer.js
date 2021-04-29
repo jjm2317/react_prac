@@ -1,6 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import UserForm from "./UserForm";
 import User from "./User";
+
+const countActiveUsers = (users) => {
+  console.log("do counting");
+  return users.filter(({ active }) => active).length;
+};
 
 const UserContainer = () => {
   let [users, setUsers] = useState([
@@ -19,13 +24,13 @@ const UserContainer = () => {
     },
   ]);
 
-  const nextId = useRef(3);
-  const nicknameRef = useRef();
-  const emailRef = useRef();
   const [inputValue, setInputValue] = useState({
     nickname: "",
     email: "",
   });
+  const nextId = useRef(3);
+  const nicknameRef = useRef();
+  const emailRef = useRef();
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -63,6 +68,14 @@ const UserContainer = () => {
       )
     );
   };
+
+  useEffect(() => {
+    console.log("마운트");
+    console.log(users);
+    return console.log("언마운트");
+  }, [users]);
+
+  const count = useMemo(() => countActiveUsers(users), [users]);
   return (
     <div>
       <UserForm
@@ -72,6 +85,7 @@ const UserContainer = () => {
         emailRef={emailRef}
         inputValue={inputValue}
       />
+      <div>활성 사용자 수: {count}</div>
       <section>
         {users.map((user) => (
           <User
