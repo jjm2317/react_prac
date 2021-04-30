@@ -32,8 +32,8 @@ const initialState = {
   }
 };
 function reducer(state, action) {
-  switch (action.type) {
-  }
+  // switch (action.type) {
+  // }
   return state;
 }
 const UserContainerByReducer = () => {

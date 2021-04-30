@@ -1,38 +1,38 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 
 const Input = () => {
   const defaultInput = useRef();
   const additionalInput = useRef();
   const [inputValue, setInputValue] = useState({
-    defaultValue: "",
-    additionalValue: "",
+    defaultValue: '',
+    additionalValue: ''
   });
 
   const { defaultValue, additionalValue } = inputValue;
-  const [resultText, setResultText] = useState("");
-  const onChange = (e) => {
+  const [resultText, setResultText] = useState('');
+  const onChange = e => {
     const { name, value } = e.target;
     setInputValue({
       ...inputValue,
-      [name]: value,
+      [name]: value
     });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = e => {
     e.preventDefault();
     setResultText(`${inputValue.defaultValue} ${inputValue.additionalValue}`);
     setInputValue({
-      [defaultInput.current.name]: "",
-      [additionalInput.current.name]: "",
+      [defaultInput.current.name]: '',
+      [additionalInput.current.name]: ''
     });
     defaultInput.current.focus();
   };
 
-  const onReset = (e) => {
+  const onReset = e => {
     e.preventDefault();
     setInputValue({
-      [defaultInput.current.name]: "",
-      [additionalInput.current.name]: "",
+      [defaultInput.current.name]: '',
+      [additionalInput.current.name]: ''
     });
 
     defaultInput.current.focus();
@@ -40,12 +40,7 @@ const Input = () => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <input
-          name="defaultValue"
-          onChange={onChange}
-          value={defaultValue}
-          ref={defaultInput}
-        />
+        <input name="defaultValue" onChange={onChange} value={defaultValue} ref={defaultInput} />
         <input
           name="additionalValue"
           placeholder="추가값"

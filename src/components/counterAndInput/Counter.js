@@ -1,13 +1,13 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState } from 'react';
 
 const initialState = 0;
 
 function reducer(state, action) {
   switch (action.type) {
-    case "INCREMENT":
-      return ++state;
-    case "DECREMENT":
-      return --state;
+    case 'INCREMENT':
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
   }
 }
 
@@ -16,13 +16,13 @@ const Counter = () => {
 
   const increase = () => {
     dispatch({
-      type: "INCREMENT",
+      type: 'INCREMENT'
     });
   };
 
   const decrease = () =>
     dispatch({
-      type: "DECREMENT",
+      type: 'DECREMENT'
     });
 
   // const [num, setNum] = useState(0);
