@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useCallback, useReducer, useRef, useState } from 'react';
 import UserForm from './UserForm';
 import User from './User';
 import UserList from './UserList';
@@ -41,12 +41,20 @@ function reducer(state, action) {
           [action.name]: action.value
         }
       };
+    case 'CREATE_USER':
+      return {
+        ...state,
+        users: [...state.users, action.user]
+      };
   }
   return state;
 }
 const UserContainerByReducer = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const onChange = e => {
+  const { inputs, users } = state;
+  console.log(state);
+  const newId = useRef(3);
+  const onChange = useCallback(e => {
     const { name, value } = e.target;
     dispatch({
       type: 'CHANGE_INPUT',
@@ -54,18 +62,28 @@ const UserContainerByReducer = () => {
       name,
       value
     });
-  };
+  });
 
-  const onCreate = () => {};
+  const onCreate = useCallback(e => {
+    e.preventDefault();
+    dispatch({
+      type: 'CREATE_USER',
+      user: {
+        id: newId.current++,
+        username: inputs.username,
+        age: inputs.age
+      }
+    });
+  });
 
-  const onRemove = () => {};
+  const onRemove = useCallback(() => {});
 
-  const onToggle = () => {};
+  const onToggle = useCallback(() => {});
   return (
     <section>
-      <UserForm onChange={onChange} />
+      <UserForm onChange={onChange} onCreate={onCreate} />
       <div>활성 사용자 수: {}</div>
-      <UserList />
+      <UserList users={users} />
     </section>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserForm = ({ onChange }) => {
+const UserForm = ({ onChange, onCreate }) => {
   const formStyle = {
     display: 'flex',
     flex: 'row wrap'
@@ -28,7 +28,7 @@ const UserForm = ({ onChange }) => {
         <input style={inputStyle} id="age" name="age" onChange={onChange} />
       </div>
 
-      <button>입력</button>
+      <button onClick={onCreate}>입력</button>
     </form>
   );
 };
