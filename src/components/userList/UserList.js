@@ -11,18 +11,22 @@ const liStyle = {
   justifyContent: 'space-around'
 };
 
-const UserList = ({ users, onRemove }) => {
+const UserList = ({ users, onRemove, onToggle }) => {
   console.log(ulStyle);
   return (
     <ul style={ulStyle}>
       {users.map(user => (
         <li style={liStyle} key={user.id}>
-          <span>
+          <span
+            onClick={() => onToggle(user.id)}
+            style={{
+              color: user.active ? 'green' : 'black',
+              cursor: 'pointer'
+            }}
+          >
             {user.username} {user.age}
           </span>
-          <button id={user.id} onClick={onRemove}>
-            삭제
-          </button>
+          <button onClick={() => onRemove(user.id)}>삭제</button>
         </li>
       ))}
     </ul>

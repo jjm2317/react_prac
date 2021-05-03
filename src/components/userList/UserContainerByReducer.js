@@ -51,6 +51,13 @@ function reducer(state, action) {
         ...state,
         users: state.users.filter(user => user.id !== action.id)
       };
+    case 'TOGGLE_USER':
+      return {
+        ...state,
+        users: state.users.map(user =>
+          user.id === action.id ? { ...user, active: !user.active } : user
+        )
+      };
   }
   return state;
 }
@@ -81,20 +88,24 @@ const UserContainerByReducer = () => {
     });
   });
 
-  const onRemove = useCallback(e => {
-    console.log(e.target.id, typeof e.target.id);
+  const onRemove = useCallback(id => {
     dispatch({
       type: 'DELETE_USER',
-      id: +e.target.id
+      id
     });
   });
 
-  const onToggle = useCallback(() => {});
+  const onToggle = useCallback(id => {
+    dispatch({
+      type: 'TOGGLE_USER',
+      id
+    });
+  });
   return (
     <section>
       <UserForm onChange={onChange} onCreate={onCreate} />
       <div>활성 사용자 수: {}</div>
-      <UserList users={users} onRemove={onRemove} />
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
     </section>
   );
 };
