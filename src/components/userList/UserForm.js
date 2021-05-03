@@ -1,26 +1,33 @@
-import React from "react";
+import React from 'react';
 
-const UserForm = () => {
+const UserForm = ({ onChange }) => {
   const formStyle = {
-    display: "flex",
-    flex: "row wrap",
+    display: 'flex',
+    flex: 'row wrap'
   };
 
   const inputDivStyle = {
-    display: "flex",
-    flex: "row wrap",
-    width: "100px",
+    display: 'flex',
+    flex: 'row wrap',
+    justifyContent: 'center',
+    width: '200px'
+  };
+
+  const inputStyle = {
+    width: '80px'
   };
   return (
     <form style={formStyle}>
       <div style={inputDivStyle}>
         <label for="username">이름</label>
-        <input id="username" />
+        <input style={inputStyle} id="username" name="username" onChange={onChange} />
       </div>
+
       <div style={inputDivStyle}>
         <label for="age">나이</label>
-        <input id="age" />
+        <input style={inputStyle} id="age" name="age" onChange={onChange} />
       </div>
+
       <button>입력</button>
     </form>
   );

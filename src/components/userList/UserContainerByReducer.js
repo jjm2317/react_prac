@@ -15,31 +15,46 @@ const initialState = {
   users: [
     {
       id: 1,
-      nickname: 'wlaks',
-      email: 'aaaa@mail.com',
+      username: 'wlaks',
+      age: 20,
       active: true
     },
     {
       id: 2,
-      nickname: 'wlaks2',
-      email: 'aaaa@mail.com2',
+      username: 'wlaks2',
+      age: 55,
       active: false
     }
   ],
   inputs: {
-    nickname: '',
-    email: ''
+    username: '',
+    age: ''
   }
 };
 function reducer(state, action) {
-  // switch (action.type) {
-  // }
+  switch (action.type) {
+    case 'CHANGE_INPUT':
+      return {
+        ...state,
+        inputs: {
+          ...state.inputs,
+          [action.name]: action.value
+        }
+      };
+  }
   return state;
 }
 const UserContainerByReducer = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const onChange = () => {};
+  const onChange = e => {
+    const { name, value } = e.target;
+    dispatch({
+      type: 'CHANGE_INPUT',
+      ...state.inputs,
+      name,
+      value
+    });
+  };
 
   const onCreate = () => {};
 
@@ -48,7 +63,7 @@ const UserContainerByReducer = () => {
   const onToggle = () => {};
   return (
     <section>
-      <UserForm />
+      <UserForm onChange={onChange} />
       <div>활성 사용자 수: {}</div>
       <UserList />
     </section>
