@@ -51,7 +51,7 @@ function reducer(state, action) {
     case 'DELETE_TODO':
       return {
         ...state,
-        todos: state.todos.filter(todo => !action.id === todo.id)
+        todos: state.todos.filter(todo => action.id !== todo.id)
       };
     default:
       throw new Error("There's not that action type");
@@ -105,11 +105,19 @@ const TodoContainer = () => {
     e.target.style.textDecoration = done ? 'none' : 'line-through';
   }, []);
 
+  const onDelete = useCallback(id => {
+    console.log(id);
+    dispatch({
+      type: 'DELETE_TODO',
+      id
+    });
+  }, []);
+
   return (
     <section>
       <h2>나의 할일</h2>
       <TodoForm onCreate={onCreate} onChange={onChange} input={input} inputRef={inputRef} />
-      <TodoList todos={todos} onCheck={onCheck} />
+      <TodoList todos={todos} onCheck={onCheck} onDelete={onDelete} />
     </section>
   );
 };

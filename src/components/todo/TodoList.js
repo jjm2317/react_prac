@@ -16,7 +16,7 @@ const todoStyle = {
 const contentStyle = {
   cursor: 'pointer'
 };
-const TodoList = ({ todos, onCheck }) => {
+const TodoList = ({ todos, onCheck, onDelete }) => {
   const x = 1;
   return (
     <ul style={listStyle}>
@@ -25,7 +25,9 @@ const TodoList = ({ todos, onCheck }) => {
           <span style={contentStyle} onClick={e => onCheck(e, todo.id, todo.done)}>
             {todo.content}
           </span>
-          <button style={{ whiteSpace: 'nowrap' }}>삭제</button>
+          <button style={{ whiteSpace: 'nowrap' }} onClick={() => onDelete(todo.id)}>
+            삭제
+          </button>
         </li>
       ))}
     </ul>
