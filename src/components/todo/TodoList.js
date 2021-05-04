@@ -12,13 +12,19 @@ const todoStyle = {
   flex: 'row nowrap',
   justifyContent: 'space-between'
 };
-const TodoList = ({ todos }) => {
+
+const contentStyle = {
+  cursor: 'pointer'
+};
+const TodoList = ({ todos, onCheck }) => {
   const x = 1;
   return (
     <ul style={listStyle}>
       {todos.map(todo => (
         <li key={todo.id} style={todoStyle}>
-          <span>{todo.content}</span>
+          <span style={contentStyle} onClick={e => onCheck(e, todo.id, todo.done)}>
+            {todo.content}
+          </span>
           <button style={{ whiteSpace: 'nowrap' }}>삭제</button>
         </li>
       ))}
