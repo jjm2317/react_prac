@@ -19,12 +19,12 @@ const UserForm = ({ onChange, onCreate }) => {
   return (
     <form style={formStyle}>
       <div style={inputDivStyle}>
-        <label for="username">이름</label>
+        <label htmlFor="username">이름</label>
         <input style={inputStyle} id="username" name="username" onChange={onChange} />
       </div>
 
       <div style={inputDivStyle}>
-        <label for="age">나이</label>
+        <label htmlFor="age">나이</label>
         <input style={inputStyle} id="age" name="age" onChange={onChange} />
       </div>
 

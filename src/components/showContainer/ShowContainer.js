@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ShowButtonSet from './ShowButtonSet';
 
 const ShowContainer = ({ children, selectRenderMode }) => {
-  const buttonList = ['counter', 'inputs', 'users', 'all', 'todo'];
+  const buttonList = ['counter', 'inputs', 'users', 'todo', 'all'];
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from 'react';
+import React, { useCallback, useReducer, useRef } from 'react';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
@@ -58,6 +58,9 @@ function reducer(state, action) {
 const TodoContainer = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { todos, input } = state;
+
+  const inputRef = useRef();
+  const newId = useRef(3);
   const onChange = useCallback(e => {
     const { value } = e.target;
 
@@ -68,11 +71,33 @@ const TodoContainer = () => {
     console.log(value);
   }, []);
 
+  const onCreate = useCallback(
+    e => {
+      e.preventDefault();
+      if (!input) {
+        inputRef.current.style.border = '1px solid red';
+        inputRef.current.focus();
+        return;
+      }
+      inputRef.current.style.border = '1px solid black';
+      dispatch({
+        type: 'CREATE_TODO',
+        todo: {
+          id: newId.current++,
+          content: input,
+          done: false
+        }
+      });
+      inputRef.current.focus();
+    },
+    [input]
+  );
+
   return (
     <section>
       <h2>나의 할일</h2>
-      <TodoForm onChange={onChange} input={input} />
-      <TodoList />
+      <TodoForm onCreate={onCreate} onChange={onChange} input={input} inputRef={inputRef} />
+      <TodoList todos={todos} />
     </section>
   );
 };
