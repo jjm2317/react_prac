@@ -11,7 +11,8 @@ function App() {
     ALL: Symbol.for('all'),
     COUNTER: Symbol.for('counter'),
     INPUTS: Symbol.for('inputs'),
-    USERS: Symbol.for('users')
+    USERS: Symbol.for('users'),
+    TODO: Symbol.for('todo')
   });
 
   const [renderMode, setRenderMode] = useState(RenderModes.ALL);
@@ -30,12 +31,15 @@ function App() {
               return <Input />;
             case RenderModes.USERS:
               return <UserContainerByReducer />;
+            case RenderModes.TODO:
+              return <TodoContainer />;
             case RenderModes.ALL:
               return (
                 <>
                   <Counter />
                   <Input />
                   <UserContainerByReducer />
+                  <TodoContainer />
                 </>
               );
             default:

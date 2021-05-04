@@ -43,7 +43,10 @@ function reducer(state, action) {
       };
     case 'CREATE_USER':
       return {
-        ...state,
+        inputs: {
+          username: '',
+          age: ''
+        },
         users: [...state.users, action.user]
       };
     case 'DELETE_USER':

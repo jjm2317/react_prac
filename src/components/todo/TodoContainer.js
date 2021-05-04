@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useReducer } from 'react';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
@@ -56,11 +56,22 @@ function reducer(state, action) {
   }
 }
 const TodoContainer = () => {
-  const x = 1;
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { todos, input } = state;
+  const onChange = useCallback(e => {
+    const { value } = e.target;
+
+    dispatch({
+      type: 'CHANGE_INPUT',
+      value
+    });
+    console.log(value);
+  }, []);
+
   return (
     <section>
       <h2>나의 할일</h2>
-      <TodoForm />
+      <TodoForm onChange={onChange} input={input} />
       <TodoList />
     </section>
   );
