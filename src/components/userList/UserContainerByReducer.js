@@ -61,53 +61,61 @@ function reducer(state, action) {
   }
   return state;
 }
+const countActiveUsers = users => users.filter(user => user.active).length;
 const UserContainerByReducer = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { inputs, users } = state;
-  console.log(state);
   const newId = useRef(3);
-  const onChange = useCallback(e => {
-    const { name, value } = e.target;
-    dispatch({
-      type: 'CHANGE_INPUT',
-      ...state.inputs,
-      name,
-      value
-    });
-  });
+  const onChange = useCallback(
+    e => {
+      const { name, value } = e.target;
+      dispatch({
+        type: 'CHANGE_INPUT',
+        ...state.inputs,
+        name,
+        value
+      });
+    },
+    [state.inputs]
+  );
 
-  const onCreate = useCallback(e => {
-    e.preventDefault();
-    dispatch({
-      type: 'CREATE_USER',
-      user: {
-        id: newId.current++,
-        username: inputs.username,
-        age: inputs.age
-      }
-    });
-  });
+  const onCreate = useCallback(
+    e => {
+      e.preventDefault();
+      dispatch({
+        type: 'CREATE_USER',
+        user: {
+          id: newId.current++,
+          username: inputs.username,
+          age: inputs.age
+        }
+      });
+    },
+    [inputs.username, inputs.age]
+  );
 
   const onRemove = useCallback(id => {
     dispatch({
       type: 'DELETE_USER',
       id
     });
-  });
+  }, []);
 
   const onToggle = useCallback(id => {
     dispatch({
       type: 'TOGGLE_USER',
       id
     });
-  });
+  }, []);
+
+  const counter = useMemo(() => countActiveUsers(users), [users]);
   return (
     <section>
       <UserForm onChange={onChange} onCreate={onCreate} />
-      <div>활성 사용자 수: {}</div>
+      <div>활성 사용자 수: {counter}</div>
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
     </section>
   );
 };
 
-export default UserContainerByReducer;
+export default React.memo(UserContainerByReducer);
