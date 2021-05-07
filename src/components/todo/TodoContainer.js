@@ -26,7 +26,10 @@ const initialState = {
       done: false
     }
   ],
-  input: ''
+  input: {
+    todo: '',
+    menu: 'all'
+  }
 };
 
 function reducer(state, action) {
@@ -34,7 +37,10 @@ function reducer(state, action) {
     case 'CHANGE_INPUT':
       return {
         ...state,
-        input: action.value
+        input: {
+          ...state.input,
+          [action.name]: action.value
+        }
       };
     case 'CREATE_TODO':
       return {
@@ -64,13 +70,13 @@ const TodoContainer = () => {
   const inputRef = useRef();
   const newId = useRef(3);
   const onChange = useCallback(e => {
-    const { value } = e.target;
+    const { name, value } = e.target;
 
     dispatch({
       type: 'CHANGE_INPUT',
+      name,
       value
     });
-    console.log(value);
   }, []);
 
   const onCreate = useCallback(

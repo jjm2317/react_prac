@@ -27,3 +27,4 @@
 
 - 배열 고차함수 (map, filter)를 이용한 CRUD 구현 & 불변성 유지
 - 배열을 통한 컴포넌트 렌더링 시 key 값 전달을 통한 update 관리
+- 상태관리 로직을 useReducer로 재 작성 후 useState와 비교
