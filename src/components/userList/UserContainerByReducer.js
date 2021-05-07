@@ -74,7 +74,6 @@ const UserContainerByReducer = () => {
       const { name, value } = e.target;
       dispatch({
         type: 'CHANGE_INPUT',
-        ...state.inputs,
         name,
         value
       });
@@ -114,7 +113,7 @@ const UserContainerByReducer = () => {
   const counter = useMemo(() => countActiveUsers(users), [users]);
   return (
     <section>
-      <UserForm onChange={onChange} onCreate={onCreate} />
+      <UserForm onChange={onChange} onCreate={onCreate} inputs={inputs} />
       <div>활성 사용자 수: {counter}</div>
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
     </section>
