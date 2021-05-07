@@ -27,7 +27,10 @@ const TodoList = ({ todos, onCheck, onDelete, input }) => {
         )
         .map(todo => (
           <li key={todo.id} style={todoStyle}>
-            <span style={contentStyle} onClick={e => onCheck(e, todo.id, todo.done)}>
+            <span
+              style={{ ...contentStyle, textDecoration: todo.done ? 'line-through' : 'none' }}
+              onClick={e => onCheck(e, todo.id, todo.done)}
+            >
               {todo.content}
             </span>
             <button style={{ whiteSpace: 'nowrap' }} onClick={() => onDelete(todo.id)}>
