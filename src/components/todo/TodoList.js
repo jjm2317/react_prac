@@ -16,20 +16,25 @@ const todoStyle = {
 const contentStyle = {
   cursor: 'pointer'
 };
-const TodoList = ({ todos, onCheck, onDelete }) => {
-  const x = 1;
+const TodoList = ({ todos, onCheck, onDelete, input }) => {
+  const menuState = input.menu;
+  console.log(todos);
   return (
     <ul style={listStyle}>
-      {todos.map(todo => (
-        <li key={todo.id} style={todoStyle}>
-          <span style={contentStyle} onClick={e => onCheck(e, todo.id, todo.done)}>
-            {todo.content}
-          </span>
-          <button style={{ whiteSpace: 'nowrap' }} onClick={() => onDelete(todo.id)}>
-            삭제
-          </button>
-        </li>
-      ))}
+      {todos
+        .filter(todo =>
+          menuState === 'active' ? !todo.done : menuState === 'done' ? todo.done : true
+        )
+        .map(todo => (
+          <li key={todo.id} style={todoStyle}>
+            <span style={contentStyle} onClick={e => onCheck(e, todo.id, todo.done)}>
+              {todo.content}
+            </span>
+            <button style={{ whiteSpace: 'nowrap' }} onClick={() => onDelete(todo.id)}>
+              삭제
+            </button>
+          </li>
+        ))}
     </ul>
   );
 };

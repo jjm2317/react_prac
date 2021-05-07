@@ -123,7 +123,7 @@ const TodoContainer = () => {
     <section>
       <h2>나의 할일</h2>
       <TodoForm onCreate={onCreate} onChange={onChange} input={input} inputRef={inputRef} />
-      <TodoList todos={todos} onCheck={onCheck} onDelete={onDelete} />
+      <TodoList todos={todos} onCheck={onCheck} onDelete={onDelete} input={input} />
     </section>
   );
 };
