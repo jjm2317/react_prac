@@ -44,4 +44,4 @@
 - useCallback, useMemo, React.memo를 통한 렌더링 최적화
 - 할일 목록의 할일을 체크하면 상태의 done 프로퍼티를 true로 바꾸고 line-through 가 생기도록 하기
 - 상태에따라 보여줄 할일목록을 select 태그로 구현, option으로 all, active(done프로퍼티가 false), done으로 구분
-- input이 빈값인 상태에서 생성버튼 클릭시 input border가 red로 변환
+- input이 빈값인 상태에서 생성버튼 클릭시 생성x, input border가 red로 변환

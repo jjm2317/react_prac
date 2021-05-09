@@ -79,39 +79,11 @@ export const UserDispatch = createContext(null);
 const UserContainerByReducer = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { inputs, users } = state;
-  const newId = useRef(3);
-  const onChange = useCallback(
-    e => {
-      const { name, value } = e.target;
-      dispatch({
-        type: 'CHANGE_INPUT',
-        name,
-        value
-      });
-    },
-    [state.inputs]
-  );
-
-  const onCreate = useCallback(
-    e => {
-      e.preventDefault();
-      dispatch({
-        type: 'CREATE_USER',
-        user: {
-          id: newId.current++,
-          username: inputs.username,
-          age: inputs.age
-        }
-      });
-    },
-    [inputs.username, inputs.age]
-  );
-
   const counter = useMemo(() => countActiveUsers(users), [users]);
   return (
     <UserDispatch.Provider value={dispatch}>
       <section>
-        <UserForm onChange={onChange} onCreate={onCreate} inputs={inputs} />
+        <UserForm inputs={inputs} />
         <div>활성 사용자 수: {counter}</div>
         <UserList users={users} />
       </section>
