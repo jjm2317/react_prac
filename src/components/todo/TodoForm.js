@@ -35,4 +35,4 @@ const TodoForm = ({ onCreate, onChange, input, inputRef }) => {
   );
 };
 
-export default TodoForm;
+export default React.memo(TodoForm);

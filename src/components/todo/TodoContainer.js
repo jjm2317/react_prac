@@ -100,7 +100,6 @@ const TodoContainer = () => {
       type: 'CHECK_TODO',
       id
     });
-    console.log(done);
     // 리렌더링은 현재 함수 호출이 마치고 나서 일어나므로 다음 done은 현재 상태를 나타낸다
     e.target.style.textDecoration = done ? 'none' : 'line-through';
   }, []);
