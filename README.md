@@ -33,7 +33,7 @@
 ### ISSUE
 
 - contextAPI를 사용하면서, 부모 컴포넌트의 컨텍스트를 참조하기 위해 부모 컴포넌트를 import 하였는데, eslint에 의해 import/no-cycle 에러가 발생
-  -- .eslintrc의 rule 프로퍼티에 "import/no-cycle":"off" 추가하여 해결
+  - .eslintrc의 rule 프로퍼티에 "import/no-cycle":"off" 추가하여 해결
 
 ## /component/TodoContainer
 
