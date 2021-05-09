@@ -1,4 +1,11 @@
-import React, { useCallback, useEffect, useReducer, useRef } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useCallback,
+  useEffect,
+  useReducer,
+  useRef
+} from 'react';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 import { initialState, reducer } from './TodoReducer';
@@ -15,6 +22,7 @@ import { initialState, reducer } from './TodoReducer';
 8. usereducer로 리팩토링
 */
 
+const MyContext = createContext('default');
 const TodoContainer = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { todos, input } = state;

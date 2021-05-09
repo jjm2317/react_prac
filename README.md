@@ -28,8 +28,14 @@
 - 배열 고차함수 (map, filter)를 이용한 CRUD 구현 & 불변성 유지
 - 배열을 통한 컴포넌트 렌더링 시 key 값 전달을 통한 update 관리
 - 상태관리 로직을 useReducer로 재 작성 후 useState와 비교
+- props로 전달하는 여러번 전달되는 함수를 contextAPI로 리팩토링
 
-## /component/userList
+### ISSUE
+
+- contextAPI를 사용하면서, 부모 컴포넌트의 컨텍스트를 참조하기 위해 부모 컴포넌트를 import 하였는데, eslint에 의해 import/no-cycle 에러가 발생
+  -- .eslintrc의 rule 프로퍼티에 "import/no-cycle":"off" 추가하여 해결
+
+## /component/TodoContainer
 
 **학습 목표 및 요구사항**
 

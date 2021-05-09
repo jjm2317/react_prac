@@ -1,6 +1,14 @@
-import React, { useEffect, useMemo, useCallback, useReducer, useRef, useState } from 'react';
+import React, {
+  useEffect,
+  createContext,
+  useMemo,
+  useCallback,
+  useReducer,
+  useRef,
+  useState
+} from 'react';
 import UserForm from './UserForm';
-import User from './User';
+// import User from './User';
 import UserList from './UserList';
 /* 요구사항
 useReducer 훅을 통한 상태 관리
@@ -65,6 +73,9 @@ function reducer(state, action) {
   return state;
 }
 const countActiveUsers = users => users.filter(user => user.active).length;
+
+export const UserDispatch = createContext(null);
+
 const UserContainerByReducer = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { inputs, users } = state;
@@ -96,27 +107,15 @@ const UserContainerByReducer = () => {
     [inputs.username, inputs.age]
   );
 
-  const onRemove = useCallback(id => {
-    dispatch({
-      type: 'DELETE_USER',
-      id
-    });
-  }, []);
-
-  const onToggle = useCallback(id => {
-    dispatch({
-      type: 'TOGGLE_USER',
-      id
-    });
-  }, []);
-
   const counter = useMemo(() => countActiveUsers(users), [users]);
   return (
-    <section>
-      <UserForm onChange={onChange} onCreate={onCreate} inputs={inputs} />
-      <div>활성 사용자 수: {counter}</div>
-      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
-    </section>
+    <UserDispatch.Provider value={dispatch}>
+      <section>
+        <UserForm onChange={onChange} onCreate={onCreate} inputs={inputs} />
+        <div>활성 사용자 수: {counter}</div>
+        <UserList users={users} />
+      </section>
+    </UserDispatch.Provider>
   );
 };
 
