@@ -11,7 +11,8 @@ const CreateForm = ({ onCreate, onChange, inputRef, input }) => (
       ref={inputRef}
       aria-label="todo"
       onChange={onChange}
-      value={input}
+      value={input.todo}
+      name="todo"
       type="text"
       placehoder="할 일을 입력하세요"
     />
@@ -19,9 +20,13 @@ const CreateForm = ({ onCreate, onChange, inputRef, input }) => (
   </form>
 );
 
-const MenuForm = () => (
+const MenuForm = ({ input, onChange }) => (
   <label>
-    <select></select>
+    <select value={input.menu} name="menu" onChange={onChange}>
+      <option>all</option>
+      <option>active</option>
+      <option>done</option>
+    </select>
   </label>
 );
 
@@ -30,7 +35,7 @@ const TodoForm = ({ onCreate, onChange, input, inputRef }) => {
   return (
     <>
       <CreateForm onCreate={onCreate} onChange={onChange} inputRef={inputRef} input={input} />
-      <MenuForm />
+      <MenuForm input={input} onChange={onChange} />
     </>
   );
 };

@@ -26,7 +26,10 @@ const initialState = {
       done: false
     }
   ],
-  input: ''
+  input: {
+    todo: '',
+    menu: 'all'
+  }
 };
 
 function reducer(state, action) {
@@ -34,12 +37,18 @@ function reducer(state, action) {
     case 'CHANGE_INPUT':
       return {
         ...state,
-        input: action.value
+        input: {
+          ...state.input,
+          [action.name]: action.value
+        }
       };
     case 'CREATE_TODO':
       return {
         todos: [...state.todos, action.todo],
-        input: ''
+        input: {
+          ...state.input,
+          todo: ''
+        }
       };
     case 'CHECK_TODO':
       return {
@@ -64,19 +73,19 @@ const TodoContainer = () => {
   const inputRef = useRef();
   const newId = useRef(3);
   const onChange = useCallback(e => {
-    const { value } = e.target;
+    const { name, value } = e.target;
 
     dispatch({
       type: 'CHANGE_INPUT',
+      name,
       value
     });
-    console.log(value);
   }, []);
 
   const onCreate = useCallback(
     e => {
       e.preventDefault();
-      if (!input) {
+      if (!input.todo) {
         inputRef.current.style.border = '1px solid red';
         inputRef.current.focus();
         return;
@@ -86,7 +95,7 @@ const TodoContainer = () => {
         type: 'CREATE_TODO',
         todo: {
           id: newId.current++,
-          content: input,
+          content: input.todo,
           done: false
         }
       });
@@ -116,7 +125,7 @@ const TodoContainer = () => {
     <section>
       <h2>나의 할일</h2>
       <TodoForm onCreate={onCreate} onChange={onChange} input={input} inputRef={inputRef} />
-      <TodoList todos={todos} onCheck={onCheck} onDelete={onDelete} />
+      <TodoList todos={todos} onCheck={onCheck} onDelete={onDelete} input={input} />
     </section>
   );
 };
