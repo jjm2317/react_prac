@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
-
+import { initialState, reducer } from './TodoReducer';
 // 요구사항
 
 /*
@@ -11,61 +11,10 @@ import TodoList from './TodoList';
 4. 수정
 5. 완료 미완료 전체 구분하여 출력
 6. 빈값 생성 제어하기
+7. 렌더링 최적화
+8. usereducer로 리팩토링
 */
 
-const initialState = {
-  todos: [
-    {
-      id: 1,
-      content: 'React',
-      done: false
-    },
-    {
-      id: 2,
-      content: 'algorithm',
-      done: false
-    }
-  ],
-  input: {
-    todo: '',
-    menu: 'all'
-  }
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'CHANGE_INPUT':
-      return {
-        ...state,
-        input: {
-          ...state.input,
-          [action.name]: action.value
-        }
-      };
-    case 'CREATE_TODO':
-      return {
-        todos: [...state.todos, action.todo],
-        input: {
-          ...state.input,
-          todo: ''
-        }
-      };
-    case 'CHECK_TODO':
-      return {
-        ...state,
-        todos: state.todos.map(todo =>
-          action.id === todo.id ? { ...todo, done: !todo.done } : todo
-        )
-      };
-    case 'DELETE_TODO':
-      return {
-        ...state,
-        todos: state.todos.filter(todo => action.id !== todo.id)
-      };
-    default:
-      throw new Error("There's not that action type");
-  }
-}
 const TodoContainer = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { todos, input } = state;

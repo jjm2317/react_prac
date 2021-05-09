@@ -28,3 +28,14 @@
 - 배열 고차함수 (map, filter)를 이용한 CRUD 구현 & 불변성 유지
 - 배열을 통한 컴포넌트 렌더링 시 key 값 전달을 통한 update 관리
 - 상태관리 로직을 useReducer로 재 작성 후 useState와 비교
+
+## /component/userList
+
+**학습 목표 및 요구사항**
+
+- 할일 목록의 CRUD 구현
+- useReducer로 상태관리
+- useCallback, useMemo, React.memo를 통한 렌더링 최적화
+- 할일 목록의 할일을 체크하면 상태의 done 프로퍼티를 true로 바꾸고 line-through 가 생기도록 하기
+- 상태에따라 보여줄 할일목록을 select 태그로 구현, option으로 all, active(done프로퍼티가 false), done으로 구분
+- input이 빈값인 상태에서 생성버튼 클릭시 input border가 red로 변환
