@@ -5,6 +5,7 @@ import ShowContainer from './components/showContainer/ShowContainer';
 import UserContainer from './components/userList/UserContainer';
 import UserContainerByReducer from './components/userList/UserContainerByReducer';
 import TodoContainer from './components/todo/TodoContainer';
+import Grid from './components/agGrid/Grid';
 
 function App() {
   const RenderModes = Object.freeze({
@@ -45,6 +46,7 @@ function App() {
             default:
           }
         })()}
+        <Grid />
       </ShowContainer>
     </div>
   );

@@ -13,7 +13,7 @@ const UserList = ({ users }) => {
   return (
     <ul style={ulStyle}>
       {users.map(user => (
-        <User user={user} />
+        <User key={user.id} user={user} />
       ))}
     </ul>
   );
