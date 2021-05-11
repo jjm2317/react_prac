@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -11,7 +11,7 @@ const sectionStyle = {
 };
 
 const Grid = () => {
-  const rowData = [
+  const rowData = useRef([
     {
       otn_inventory_id: 1,
       desc1: '',
@@ -90,11 +90,11 @@ const Grid = () => {
       update_date: '2021-05-11_03:00:00',
       ctype: ''
     }
-  ];
-  const fields = Object.keys(rowData[0]);
+  ]);
+  const fields = Object.keys(rowData.current[0]);
   return (
     <section className="ag-theme-alpine" style={sectionStyle}>
-      <AgGridReact rowData={rowData}>
+      <AgGridReact rowData={rowData.current}>
         {fields.map(field => (
           <AgGridColumn key={field} field={field}></AgGridColumn>
         ))}
