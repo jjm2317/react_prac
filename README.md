@@ -29,6 +29,7 @@
 - 배열을 통한 컴포넌트 렌더링 시 key 값 전달을 통한 update 관리
 - 상태관리 로직을 useReducer로 재 작성 후 useState와 비교
 - props로 전달하는 여러번 전달되는 함수를 contextAPI로 리팩토링
+- immer 를 사용하여 리듀서 함수 리팩토링
 
 ### ISSUE
 

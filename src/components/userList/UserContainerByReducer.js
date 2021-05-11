@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState
 } from 'react';
+import produce from 'immer';
 import UserForm from './UserForm';
 // import User from './User';
 import UserList from './UserList';
@@ -42,33 +43,29 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case 'CHANGE_INPUT':
-      return {
-        ...state,
-        inputs: {
-          ...state.inputs,
-          [action.name]: action.value
-        }
-      };
+      return produce(state, draft => {
+        draft.inputs[action.name] = action.value;
+      });
+
     case 'CREATE_USER':
-      return {
-        inputs: {
+      return produce(state, draft => {
+        draft.inputs = {
           username: '',
           age: ''
-        },
-        users: [...state.users, action.user]
-      };
+        };
+        draft.users.push(action.user);
+      });
+
     case 'DELETE_USER':
-      return {
-        ...state,
-        users: state.users.filter(user => user.id !== action.id)
-      };
+      return produce(state, draft => {
+        const idx = draft.users.findIndex(user => user.id === action.id);
+        draft.users.splice(idx, 1);
+      });
     case 'TOGGLE_USER':
-      return {
-        ...state,
-        users: state.users.map(user =>
-          user.id === action.id ? { ...user, active: !user.active } : user
-        )
-      };
+      return produce(state, draft => {
+        const user = draft.users.find(user => user.id === action.id);
+        user.active = !user.active;
+      });
   }
   return state;
 }
