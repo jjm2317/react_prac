@@ -1,18 +1,7 @@
 import React from 'react';
 
 export const initialState = {
-  todos: [
-    {
-      id: 1,
-      content: 'React',
-      done: false
-    },
-    {
-      id: 2,
-      content: 'algorithm',
-      done: false
-    }
-  ],
+  todos: [],
   input: {
     todo: '',
     menu: 'all'

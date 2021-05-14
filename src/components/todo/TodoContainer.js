@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, {
   createContext,
   useContext,
@@ -6,6 +7,7 @@ import React, {
   useReducer,
   useRef
 } from 'react';
+import useAsync from '../agGrid/useAsync';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 import { initialState, reducer } from './TodoReducer';
@@ -21,9 +23,14 @@ import { initialState, reducer } from './TodoReducer';
 7. 렌더링 최적화
 8. usereducer로 리팩토링
 */
-
+const getTodo = async id => {
+  const response = await axios.get('http://localhost:8080/todo');
+  return response.data;
+};
 const MyContext = createContext('default');
 const TodoContainer = () => {
+  const [asyncState, refetch] = useAsync(getTodo);
+  // const { loading, todos, error } = asyncState;
   const [state, dispatch] = useReducer(reducer, initialState);
   const { todos, input } = state;
 
