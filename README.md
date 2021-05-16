@@ -47,10 +47,15 @@
 - 상태에따라 보여줄 할일목록을 select 태그로 구현, option으로 all, active(done프로퍼티가 false), done으로 구분
 - input이 빈값인 상태에서 생성버튼 클릭시 생성x, input border가 red로 변환
 
-
 ## /components/agGrid
 
 **학습 목표 및 요구사항**
 
 - ag-grid 라이브러리 사용
+- ag-grid 의 행을 클릭시 해당 행의 데이터의 id 값을 비동기로 요청하여 하단에 데이터 정보 렌더링
 - useEffect 로 비동기 요청 처리
+- react-async 라이브러리 적용해보기
+  - 장점: 비동기에 필요한 기능을 바로 사용 가능하다
+  - 단점: 옵션이 복잡하다.
+- context API로 비동기 작업 리팩토링
+  - 특정 데이터를 여러개의 컴포넌트에서 사용할때 유용하다.
