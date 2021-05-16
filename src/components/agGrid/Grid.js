@@ -79,7 +79,7 @@ const Grid = () => {
   }, []);
 
   const { loading, data, error } = state;
-  const rowData = state.data;
+  const rowData = data;
   if (loading) {
     return <div>로딩중</div>;
   }
