@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React from 'react';
-import { isCompositeComponent } from 'react-dom/test-utils';
-import useAsync from './useAsync';
+import { useAsync } from 'react-async';
 
-const getLinkbook = async id => {
+const getLinkbook = async ({ id }) => {
   const response = await axios.get(
     `http://121.126.223.246:8888/v1/tn/linkbook?otnLinkbookId=${id}`,
     {
@@ -16,17 +15,16 @@ const getLinkbook = async id => {
   return response.data;
 };
 const Linkbook = ({ id }) => {
-  const [state] = useAsync(() => getLinkbook(id), [id]);
-  const { loading, data, error } = state;
-
-  if (loading) return <div>로딩중</div>;
+  const { data, error, isLoading } = useAsync({ promiseFn: getLinkbook, id, watch: id });
+  const content = data?.content;
+  if (isLoading) return <div>로딩중</div>;
   if (error) return <div>{console.log(error)}</div>;
-  if (!data) return null;
+  if (!content) return null;
   return (
     <div>
-      {Object.keys(data[0]).map(key => (
+      {Object.keys(content[0]).map(key => (
         <div>
-          {key} {data[0][key]}
+          {key} {content[0][key]}
         </div>
       ))}
     </div>
