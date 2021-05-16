@@ -31,7 +31,7 @@ const Grid = () => {
   const [state, refetch] = useAsync(getRowData, [], true);
   const [linkbookId, setLinkbookId] = useState(null);
   const { loading, data, error } = state;
-  const rowData = data;
+  const rowData = data?.content;
   if (loading) {
     return <div>로딩중</div>;
   }
