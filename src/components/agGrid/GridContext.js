@@ -1,4 +1,5 @@
-import React, { createContext, useContext } from 'react';
+import axios from 'axios';
+import React, { createContext, useContext, useReducer } from 'react';
 
 const initialState = {
   linkbooks: {
@@ -68,16 +69,15 @@ function linkbooksReducer(state, action) {
   }
 }
 
-//state 용 context
-//dispatch 용 context
+// state 용 context
+// dispatch 용 context
 // 따로따로 만들어줘야 컴포넌트를 최적화할 때 용이함
 const LinkbooksStateContext = createContext(null);
 const LinkbooksDispatchContext = createContext(null);
 
-//children을 받아서 렌더링 할때 위 두개에 맞는 프로바이더로 감싸줄예정
-export function LinkbookProvider({ children }) {
+// children을 받아서 렌더링 할때 위 두개에 맞는 프로바이더로 감싸줄예정
+export function LinkbooksProvider({ children }) {
   const [state, dispatch] = useReducer(linkbooksReducer, initialState);
-
   return (
     <LinkbooksStateContext.Provider value={state}>
       <LinkbooksDispatchContext.Provider value={dispatch}>

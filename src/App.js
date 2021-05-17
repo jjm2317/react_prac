@@ -6,6 +6,7 @@ import UserContainer from './components/userList/UserContainer';
 import UserContainerByReducer from './components/userList/UserContainerByReducer';
 import TodoContainer from './components/todo/TodoContainer';
 import Grid from './components/agGrid/Grid';
+import { LinkbooksProvider } from './components/agGrid/GridContext';
 
 function App() {
   const RenderModes = Object.freeze({
@@ -24,33 +25,35 @@ function App() {
   };
   return (
     <div>
-      <ShowContainer selectRenderMode={selectRenderMode}>
-        {(() => {
-          switch (renderMode) {
-            case RenderModes.COUNTER:
-              return <Counter />;
-            case RenderModes.INPUTS:
-              return <Input />;
-            case RenderModes.USERS:
-              return <UserContainerByReducer />;
-            case RenderModes.TODO:
-              return <TodoContainer />;
-            case RenderModes.GRID:
-              return <Grid />;
-            case RenderModes.ALL:
-              return (
-                <>
-                  <Counter />
-                  <Input />
-                  <UserContainerByReducer />
-                  <TodoContainer />
-                  <Grid />
-                </>
-              );
-            default:
-          }
-        })()}
-      </ShowContainer>
+      <LinkbooksProvider>
+        <ShowContainer selectRenderMode={selectRenderMode}>
+          {(() => {
+            switch (renderMode) {
+              case RenderModes.COUNTER:
+                return <Counter />;
+              case RenderModes.INPUTS:
+                return <Input />;
+              case RenderModes.USERS:
+                return <UserContainerByReducer />;
+              case RenderModes.TODO:
+                return <TodoContainer />;
+              case RenderModes.GRID:
+                return <Grid />;
+              case RenderModes.ALL:
+                return (
+                  <>
+                    <Counter />
+                    <Input />
+                    <UserContainerByReducer />
+                    <TodoContainer />
+                    <Grid />
+                  </>
+                );
+              default:
+            }
+          })()}
+        </ShowContainer>
+      </LinkbooksProvider>
     </div>
   );
 }
