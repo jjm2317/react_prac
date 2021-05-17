@@ -19,6 +19,7 @@ const Linkbook = ({ id }) => {
   // const { data, error, isLoading } = useAsync({ promiseFn: getLinkbook, id, watch: id });
   const state = useLinkbooksState();
   const dispatch = useLinkbooksDispatch();
+  // 컴포넌트가 처음 렌더링될때 데이터를 보여주기 위함
   useEffect(() => {
     getLinkbook(dispatch, id);
   }, [id, dispatch]);

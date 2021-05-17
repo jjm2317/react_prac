@@ -32,6 +32,7 @@ const Grid = () => {
   // const [state, refetch] = useAsync(getRowData, [], true);
   const state = useLinkbooksState();
   const dispatch = useLinkbooksDispatch();
+  // 컴포넌트가 처음렌더링될때 데이터를 보여주는대신, 버튼 클릭 시 비동기 작업을 수행하고 싶다면 아래와 같이 함수화
   const fetchData = useCallback(() => getLinkbooks(dispatch), [dispatch]);
   const [linkbookId, setLinkbookId] = useState(null);
   const { loading, data, error } = state.linkbooks;
