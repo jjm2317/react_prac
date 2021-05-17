@@ -107,3 +107,37 @@ export const useLinkbooksDispatch = () => {
   if (!dispatch) throw new Error('Cannot find LinkbooksDispatchProvider value');
   return dispatch;
 };
+
+export const getLinkbooks = async dispatch => {
+  dispatch({ type: 'GET_LINKBOOKS' });
+  try {
+    const { data } = await axios.get('http://121.126.223.246:8888/v1/tn/linkbook', {
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NDg3MDgyNjksImlhdCI6MTYxNzE3MjI2OSwianRpIjoidGVzdEBza3QuY29tIn0.7KCLkiUlkF0fbhViugeITRJ-nIpvz4Jro1wMYJn66efLTZu1Hly9XyyquodwYTECQ-mbfQaI6r-3eP5y5Ywo0w'
+      }
+    });
+
+    dispatch({ type: 'GET_LINKBOOKS_SUCCESS', data });
+  } catch (e) {
+    dispatch({ type: 'GET_LINKBOOKS_ERROR', error: e });
+  }
+};
+export const getLinkbook = async (dispatch, id) => {
+  dispatch({ type: 'GET_LINKBOOK' });
+  try {
+    const { data } = await axios.get(
+      `http://121.126.223.246:8888/v1/tn/linkbook?otnLinkbookId=${id}`,
+      {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NDg3MDgyNjksImlhdCI6MTYxNzE3MjI2OSwianRpIjoidGVzdEBza3QuY29tIn0.7KCLkiUlkF0fbhViugeITRJ-nIpvz4Jro1wMYJn66efLTZu1Hly9XyyquodwYTECQ-mbfQaI6r-3eP5y5Ywo0w'
+        }
+      }
+    );
+
+    dispatch({ type: 'GET_LINKBOOK_SUCCESS', data });
+  } catch (e) {
+    dispatch({ type: 'GET_LINKBOOK_ERROR', error: e });
+  }
+};
