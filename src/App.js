@@ -7,6 +7,7 @@ import UserContainerByReducer from './components/userList/UserContainerByReducer
 import TodoContainer from './components/todo/TodoContainer';
 import Grid from './components/agGrid/Grid';
 import { LinkbooksProvider } from './components/agGrid/GridContext';
+import RouterContainer from './components/reactRouter/RouteContainer';
 
 function App() {
   const RenderModes = Object.freeze({
@@ -15,7 +16,8 @@ function App() {
     INPUTS: Symbol.for('inputs'),
     USERS: Symbol.for('users'),
     TODO: Symbol.for('todo'),
-    GRID: Symbol.for('grid')
+    GRID: Symbol.for('grid'),
+    ROUTER: Symbol.for('router')
   });
 
   const [renderMode, setRenderMode] = useState(RenderModes.ALL);
@@ -39,6 +41,8 @@ function App() {
                 return <TodoContainer />;
               case RenderModes.GRID:
                 return <Grid />;
+              case RenderModes.ROUTER:
+                return <RouterContainer />;
               case RenderModes.ALL:
                 return (
                   <>
@@ -47,6 +51,7 @@ function App() {
                     <UserContainerByReducer />
                     <TodoContainer />
                     <Grid />
+                    <RouterContainer />
                   </>
                 );
               default:

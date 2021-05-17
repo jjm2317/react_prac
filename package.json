@@ -9,10 +9,12 @@
     "ag-grid-community": "^25.2.1",
     "ag-grid-react": "^25.2.0",
     "axios": "^0.21.1",
+    "cross-env": "^7.0.3",
     "immer": "^9.0.2",
     "react": "^17.0.1",
     "react-async": "^10.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "styled-components": "^5.2.3",
     "web-vitals": "^0.2.4"
