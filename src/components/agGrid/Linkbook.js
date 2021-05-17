@@ -23,7 +23,7 @@ const Linkbook = ({ id }) => {
   return (
     <div>
       {Object.keys(content[0]).map(key => (
-        <div>
+        <div key={key}>
           {key} {content[0][key]}
         </div>
       ))}
