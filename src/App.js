@@ -10,7 +10,7 @@ import TodoContainer from './components/todo/TodoContainer';
 import Grid from './components/agGrid/Grid';
 import { LinkbooksProvider } from './components/agGrid/GridContext';
 import RouterContainer from './components/reactRouter/RouteContainer';
-import rootReducer from './components/milddleWare/modules';
+import MwContainer from './components/milddleWare/MwContainer';
 
 function App() {
   const RenderModes = Object.freeze({
@@ -20,7 +20,8 @@ function App() {
     USERS: Symbol.for('users'),
     TODO: Symbol.for('todo'),
     GRID: Symbol.for('grid'),
-    ROUTER: Symbol.for('router')
+    ROUTER: Symbol.for('router'),
+    MIDDLEWARE: Symbol.for('middleWare')
   });
 
   const [renderMode, setRenderMode] = useState(RenderModes.ALL);
@@ -29,42 +30,42 @@ function App() {
     setRenderMode(Symbol.for(symbolKey));
   };
 
-  const store = createStore(rootReducer);
   return (
     <div>
       <LinkbooksProvider>
-        <Provider store={store}>
-          <ShowContainer selectRenderMode={selectRenderMode}>
-            {(() => {
-              switch (renderMode) {
-                case RenderModes.COUNTER:
-                  return <Counter />;
-                case RenderModes.INPUTS:
-                  return <Input />;
-                case RenderModes.USERS:
-                  return <UserContainerByReducer />;
-                case RenderModes.TODO:
-                  return <TodoContainer />;
-                case RenderModes.GRID:
-                  return <Grid />;
-                case RenderModes.ROUTER:
-                  return <RouterContainer />;
-                case RenderModes.ALL:
-                  return (
-                    <>
-                      <Counter />
-                      <Input />
-                      <UserContainerByReducer />
-                      <TodoContainer />
-                      <Grid />
-                      <RouterContainer />
-                    </>
-                  );
-                default:
-              }
-            })()}
-          </ShowContainer>
-        </Provider>
+        <ShowContainer selectRenderMode={selectRenderMode}>
+          {(() => {
+            switch (renderMode) {
+              case RenderModes.COUNTER:
+                return <Counter />;
+              case RenderModes.INPUTS:
+                return <Input />;
+              case RenderModes.USERS:
+                return <UserContainerByReducer />;
+              case RenderModes.TODO:
+                return <TodoContainer />;
+              case RenderModes.GRID:
+                return <Grid />;
+              case RenderModes.ROUTER:
+                return <RouterContainer />;
+              case RenderModes.MIDDLEWARE:
+                return <MwContainer />;
+              case RenderModes.ALL:
+                return (
+                  <>
+                    <Counter />
+                    <Input />
+                    <UserContainerByReducer />
+                    <TodoContainer />
+                    <Grid />
+                    <RouterContainer />
+                    <MwContainer />
+                  </>
+                );
+              default:
+            }
+          })()}
+        </ShowContainer>
       </LinkbooksProvider>
     </div>
   );
