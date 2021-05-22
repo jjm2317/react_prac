@@ -23,15 +23,16 @@ function App() {
           <Link to="/">홈</Link>
         </li>
         <li>
-          <Link to="/first">첫번째 실습</Link>
+          <Link to="/first">첫번째 실습(리액트 기본)</Link>
         </li>
         <li>
-          <Link to="/second">두번째 실습</Link>
+          <Link to="/second">두번째 실습(리덕스)</Link>
         </li>
       </ul>
       <Switch>
         <Route path="/" render={() => <div>페이지를 선택하세요</div>} exact />
         <Route path="/first" component={FirstPrac} />
+        <Route path="/second" />
       </Switch>
     </div>
   );
