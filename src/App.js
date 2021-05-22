@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { Link, Route, Switch } from 'react-router-dom';
 import Counter from './components/counterAndInput/Counter';
 import Input from './components/counterAndInput/Input';
 import ShowContainer from './components/showContainer/ShowContainer';
@@ -17,7 +18,21 @@ import FirstPrac from './FirstPrac';
 function App() {
   return (
     <div>
-      <FirstPrac />
+      <ul>
+        <li>
+          <Link to="/">홈</Link>
+        </li>
+        <li>
+          <Link to="/first">첫번째 실습</Link>
+        </li>
+        <li>
+          <Link to="/second">두번째 실습</Link>
+        </li>
+      </ul>
+      <Switch>
+        <Route path="/" render={() => <div>페이지를 선택하세요</div>} exact />
+        <Route path="/first" component={FirstPrac} />
+      </Switch>
     </div>
   );
 }
