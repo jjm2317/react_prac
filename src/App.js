@@ -14,6 +14,7 @@ import RouterContainer from './components/reactRouter/RouteContainer';
 import MwContainer from './components/reduxMw/MwContainer';
 import useRender, { RenderModes } from './Render';
 import FirstPrac from './FirstPrac';
+import SecondPrac from './SecondPrac';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
       <Switch>
         <Route path="/" render={() => <div>페이지를 선택하세요</div>} exact />
         <Route path="/first" component={FirstPrac} />
-        <Route path="/second" />
+        <Route path="/second" component={SecondPrac} />
       </Switch>
     </div>
   );
