@@ -1,8 +1,13 @@
 const GET_TODOS = 'GET_TODOS';
 const GET_TODOS_SUCCESS = 'GET_TODOS_SUCCESS';
 const GET_TODOS_ERROR = 'GET_TODOS_ERROR';
+const GET_TODO = 'GET_TODO';
+const GET_TODO_SUCCESS = 'GET_TODO_SUCCESS';
+const GET_TODO_ERRIR = 'GET_TODO_ERROR';
+
 const { put, call, takeEvery, all } = ReduxSagaEffects;
 const getTodos = () => ({ type: GET_TODOS });
+const getTodo = () => ({ type: GET_TODO });
 
 function* getTodosSaga() {
   try {
@@ -21,8 +26,31 @@ function* getTodosSaga() {
   }
 }
 
+function* getTodoSaga(id) {
+  try {
+    const todo = yield call(() => fetch(`http://localhost:3000/todo/${id}`)).then(res =>
+      res.json()
+    );
+
+    yield put({
+      type: GET_TODO_SUCCESS,
+      payload: todo
+    });
+  } catch (e) {
+    yield put({
+      type: GET_TODO_ERRIR,
+      payload: e
+    });
+  }
+}
+
 const initialState = {
   todos: {
+    loading: false,
+    data: null,
+    error: null
+  },
+  todo: {
     loading: false,
     data: null,
     error: null
